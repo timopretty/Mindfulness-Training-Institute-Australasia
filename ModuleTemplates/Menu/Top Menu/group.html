@@ -1,0 +1,15 @@
+<ul id="top-menu">
+    {tag_menuchilditem}
+	{% if globals.user.isLoggedIn == 'true' %}
+		<li>
+			<a href="/forums">Student Area</a>
+		</li>	
+		<li>
+			<a href="/LogOutProcess.aspx">Logout</a>
+		</li>
+	{% else -%}
+		<li>
+			<a href="/students-login">Login</a>
+		</li>	
+	{% endif -%}
+</ul>

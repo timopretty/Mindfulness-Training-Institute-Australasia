@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <title>Subscribe</title>
+    </head>
+    <body>
+        <h2>Subscribe</h2>
+		<p>Subscribe to our newsletter below.</p>
+		<form id="subscribe-form" name="catemaillistform34340" onSubmit="return checkWholeForm34340(this)" method="post" action="/CampaignProcess.aspx?ListID=54119&OPTIN=true">
+			<div class="form-group">
+				<label for="CLFullName">Full Name</label>
+				<input type="text" name="FullName" id="CLFullName" maxlength="255" class="form-control" />
+			</div>
+			<div class="form-group">
+				<label for="CLEmailAddress">Email Address</label>
+				<input type="text" name="EmailAddress" id="CLEmailAddress" maxlength="255" class="form-control" />
+			</div>
+			<div class="form-group">
+				<input class="btn btn-primary" type="submit" value="Subscribe" id="catlistbutton" />
+			</div>
+			<script type="text/javascript" src="/CatalystScripts/ValidationFunctions.js"></script>
+			<script type="text/javascript">
+				//<![CDATA[
+				function checkWholeForm34340(theForm){
+					var why = "";
+					if (theForm.EmailAddress) why += checkEmail(theForm.EmailAddress.value); 
+					if (why != ""){
+						alert(why);
+						return false;
+					}
+					theForm.submit();
+					return false;
+				}
+			//]]>
+			</script>
+		</form>
+    </body>
+</html>

@@ -1,0 +1,97 @@
+
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title></title>
+
+<link rel="stylesheet" type="text/css" href="/media/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/media/css/superfish.css" />
+<link rel="stylesheet" type="text/css" href="/media/css/jquery.mmenu.css" />
+<link rel="stylesheet" type="text/css" href="/media/css/jquery.mmenu.themes.css" />
+<link rel="stylesheet" type="text/css" href="/media/css/common.css" />
+</head>
+<body>
+{module_contentholder,name="Bugherd"}
+<div id="header" class="hidden-lg"><a href="#myMenu1"></a></div>
+<div class="heading-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-23 col-lg-offset-1">
+		  {% include "/_System/Includes/header.inc" %}
+	  </div>
+    </div>
+  </div>
+</div>
+<div class="menu-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-23 col-lg-offset-1" id="menu-wrapper"> {module_menu, version="2", menuId="14623", moduleTemplateGroup="Default"} </div>
+    </div>
+  </div>
+</div>
+<div class="slider"> <img alt="" src="/images/MTIAbanner-1100x400.png" style="border: 0px;" /> </div>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-14 col-lg-offset-1"> {tag_pagecontent} </div>
+    <div class="col-lg-7 col-lg-offset-1">
+      <h3>Subscribe</h3>
+      <form name="catemaillistform34340" onSubmit="return checkWholeForm34340(this)" method="post" action="/CampaignProcess.aspx?ListID=54119&OPTIN=true">
+       
+          <div class="form-group">
+            <label for="CLFullName">Full Name</label>
+       
+            <input type="text" name="FullName" id="CLFullName" maxlength="255" class="form-control" />
+            
+            </div>
+        
+        <div class="form-group">
+            <label for="CLEmailAddress">Email Address</label>
+           
+            <input type="text" name="EmailAddress" id="CLEmailAddress" maxlength="255" class="form-control" />
+        </div>
+         
+         <div class="form-group">
+            <input class="btn btn-primary" type="submit" value="Subscribe" id="catlistbutton" />
+            
+         </div>
+          <script type="text/javascript" src="/CatalystScripts/ValidationFunctions.js"></script><script type="text/javascript">
+//<![CDATA[
+function checkWholeForm34340(theForm){var why = "";if (theForm.EmailAddress) why += checkEmail(theForm.EmailAddress.value); if (why != ""){alert(why);return false;}theForm.submit();return false;}
+//]]>
+</script>
+      </form>
+          </div>
+      
+       
+    </div>
+  </div>
+</div>
+</div>
+<div class="promo">
+  <div class="container">
+    <div class="col-lg-23 col-lg-offset-1">
+      <h4>Mindfulness Training Institute Australasia (MTIA)</h4>
+    </div>
+  </div>
+</div>
+<div class="page-footer">
+  <div class="container">
+    <div class="col-lg-23 col-lg-offset-1">&copy; 2014 Mindfulness Training Institute Australasia. </div>
+  </div>
+</div>
+<!--Required Core Scripts--> 
+<script src="//code.jquery.com/jquery-2.0.3.min.js"></script> 
+<script src="/media/js/bootstrap.min.js"></script> 
+<script src="/media/js/respond.min.js"></script> 
+<script src="/media/js/modernizr-2.7.1.js"></script> 
+<!--Optional Scripts--> 
+<script src="/media/js/hoverIntent.js"></script> 
+<script src="/media/js/superfish.js"></script> 
+<script src="/media/js/jquery.bxslider.min.js"></script> 
+<script src="/media/js/jquery.mmenu.min.js"></script> 
+<script src="/media/js/config.js"></script> 
+{module_contentholder,138917}
+</body>
+</html>

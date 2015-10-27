@@ -1,0 +1,17 @@
+<div id="myMenu1">{tag_menugroup}</div>
+<script type="text/javascript" src="/CatalystScripts/Java_DynMenusSelectedCSS.js"></script>
+<script type="text/javascript" >
+	var divTagId = "myMenu1";
+	var ulTagId = "myMenu1List";
+	var ulTagClass = "sf-menu";
+	if ((null !== ulTagId) && ("" !== ulTagId)) {
+		document.getElementById(divTagId).getElementsByTagName("ul")[0].setAttribute("id",ulTagId);
+	}
+	if ((null !== ulTagClass) && ("" !== ulTagClass)) {
+		document.getElementById(divTagId).getElementsByTagName("ul")[0].className = ulTagClass;
+	}
+	// this will set the selected state
+	if ((null !== ulTagId) && ("" !== ulTagId)) {
+		catSetSelectedCSSItem(ulTagId);
+	}
+</script>

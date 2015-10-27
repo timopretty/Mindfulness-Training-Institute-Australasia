@@ -1,0 +1,120 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <link rel="stylesheet" type="text/css" href="/media/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="/media/css/superfish.css" />
+        <link rel="stylesheet" type="text/css" href="/media/css/jquery.mmenu.css" />
+        <link rel="stylesheet" type="text/css" href="/media/css/common.css" />
+        {module_contentholder,name="Bugherd"}
+        <div id="header" class="hidden-lg"><a href="#menu"></a></div>
+        <div class="heading-bg">
+        <div class="container">
+        <div class="row">
+        <div class="col-lg-23 col-lg-offset-1">
+			{% include "/_System/Includes/header.inc" %}
+		</div>
+        </div>
+        </div>
+        </div>
+        <div class="menu-bg">
+        <div class="container">
+        <div class="row">
+        <div class="col-lg-23 col-lg-offset-1" id="menu-wrapper">
+        <div id="menu"> {module_menu, version="2", menuId="14623", moduleTemplateGroup="Default"} </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        <div class="container">
+        <div class="row">
+        <div class="col-lg-14 col-lg-offset-1"> {tag_pagecontent} </div>
+        <div class="col-lg-7 col-lg-offset-1">
+        <h3><span style="line-height: 1.1;">SECURE ZONE LOGIN</span></h3>
+        <div>
+        <div>
+        <div class="secure-login">
+        <form name="catseczoneform52478" onSubmit="return checkWholeForm52478(this)" method="post" action="https://mtia.worldsecuresystems.com/ZoneProcess.aspx?ZoneID=482&amp;Referrer={module_siteUrl,true,true}&amp;OID={module_oid}&amp;OTYPE={module_otype}">
+            <div class="form">
+            <div class="item">
+            <label for="SZUsername">Username</label>
+            <br />
+            <input class="form-control" type="text" name="Username" id="SZUsername" maxlength="255" />
+            </div>
+            <div class="item">
+            <label for="SZPassword">Password</label>
+            <br />
+            <input class="form-control" type="password" name="Password" id="SZPassword" maxlength="255" autocomplete="off" />
+            </div>
+            <div class="item">
+            <input type="checkbox" name="RememberMe" id="RememberMe" />
+            <label for="RememberMe">Remember Me</label>
+            </div>
+            <div class="item">
+            <input class="btn btn-primary" type="submit" value="Log in" />
+            &nbsp;<a href="/_System/SystemPages/PasswordRetrieveRequest">Lost password?</a>
+            <p><br />
+            </p>
+            </div>
+            </div>
+            <script type="text/javascript" src="/CatalystScripts/ValidationFunctions.js"></script>
+            <script type="text/javascript">
+//<![CDATA[
+function checkWholeForm52478(theForm){var why = "";if (theForm.Username) why += isEmpty(theForm.Username.value, "Username");if (theForm.Password) why += isEmpty(theForm.Password.value, "Password");if (why != ""){alert(why);return false;}theForm.submit();return false;}
+//]]>
+</script>
+        </form>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        <div class="promo">
+        <div class="container">
+        <div class="col-lg-23 col-lg-offset-1">
+        <h4>Mindfulness Training Institute Australasia (MTIA)</h4>
+        </div>
+        </div>
+        </div>
+        <div class="page-footer">
+        <div class="container">
+        <div class="col-lg-23 col-lg-offset-1">&copy; 2014 Mindfulness Training Institute Australasia. </div>
+        </div>
+        </div>
+        <!--Required Core Scripts-->
+        <script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+        <script src="/media/js/bootstrap.min.js"></script>
+        <script src="/media/js/respond.min.js"></script>
+        <script src="/media/js/modernizr-2.7.1.js"></script>
+        <!--Optional Scripts-->
+        <script src="/media/js/jquery.paypwithpaypal.1.1.3-min.js"></script>
+        <script src="/media/js/hoverIntent.js"></script>
+        <script src="/media/js/superfish.js"></script>
+        <script src="/media/js/jquery.bxslider.min.js"></script>
+        <script src="/media/js/jquery.mmenu.min.js"></script>
+        <script src="/media/js/config.js"></script>
+        {module_contentholder,138917}
+        <script>
+$(function(){
+
+	$('#sbpaypal').click(function(){
+		// Run the plugin
+		$('#paypal-payment-form').paywithpaypal({
+			missingFormFields: "Please enter information into the highlighted fields",
+			errorClass: "fielderror",
+			mode: "live"
+		});
+		// Stop default function of the link
+		return false;
+	});
+
+	$('#confirmationform').paywithpaypal({
+		invalidMessage: "You can not make another submission with this entry.",
+		autoSubmit: true
+	});
+})
+</script>
+    </body>
+</html>
