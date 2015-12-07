@@ -16,9 +16,60 @@
 		{% if this['description'] != "" -%}
 			<p>{{description}}</p>
 		{% endif -%}
-	</div>	
-	{% if this['Registration Open'] != "No" -%}	
-		<form id="event-booking-form" class="form-style payment-form" name="catwebformform71587" method="post" onsubmit="return checkWholeForm71587(this)" enctype="multipart/form-data" action="https://mtia.worldsecuresystems.com/FormProcessv2.aspx?WebFormID=99039&amp;OID={{this.['Event ID']}}&amp;OTYPE=61&amp;EID={module_eid}&amp;CID={module_cid}&amp;CC={module_urlcountrycode}&amp;Referrer={module_siteurl,true,true&SendInvoice=true}&OPTIN=true">	
+	</div>
+	{% if this['Registration Open'] != "No" -%}
+		{% if this['classifications'] contains "Teacher" -%}
+			{% if globals.user.isLoggedIn == true -%}
+				{module_data resource="zonecustomers" version="v3" fields="customerId,zoneId,secureZone,customer" skip="0" limit="10" where="\{'customer.id':'{{globals.user.entityId}}'\}" order="zoneId" collection="zoneData"}
+				{% if zoneData.items[0].secureZone.name == "Student Secure Zone" -%}
+					{% assign showLoginForm = "false" -%}
+					{% assign showBookingForm = "true" -%}
+					{% assign showSignUpForm = "false" -%}
+				{% else -%}
+					{% assign showLoginForm = "false" -%}
+					{% assign showBookingForm = "false" -%}
+					{% assign showSignUpForm = "true" -%}
+				{% endif -%}
+			{% else -%}
+				{% assign showLoginForm = "true" -%}
+				{% assign showBookingForm = "false" -%}
+				{% assign showSignUpForm = "true" -%}
+			{% endif -%}
+		{% else -%}
+			{% assign showBookingForm = "true" -%}
+			{% assign showLoginForm = "false" -%}
+			{% assign showSignUpForm = "false" -%}
+		{% endif -%}
+
+		{% if showSignUpForm == "true" -%}
+			<h2>The TDR is for all who have completed the MBSR/CT  Level I Intensive with MTIA,
+or an equivalent basic training with another organization eg. CTAD, Openground, CFM etc.</h2>
+		{% endif -%}
+
+		{% if showLoginForm == "true" -%}
+		<div class="secure-login" style="float: right">
+			<h3>Login here if you have password access</h3>
+			<form name="catseczoneform10341" onsubmit="return checkWholeForm10341(this)" method="post" action="https://mtia.worldsecuresystems.com/ZoneProcess.aspx?ZoneID=-1&Referrer={module_siteUrl,true,true}&OID={module_oid}&OTYPE={module_otype}">
+				<div class="form"><div class="item"><label for="SZUsername">Username</label><br /><input class="cat_textbox_small" type="text" name="Username" id="SZUsername" maxlength="255" /></div><div class="item"><label for="SZPassword">Password</label><br /><input class="cat_textbox_small" type="password" name="Password" id="SZPassword" maxlength="255" autocomplete="off" /></div><div class="item"><input type="checkbox" name="RememberMe" id="RememberMe" /><label for="RememberMe">Remember Me</label></div><div class="item"><input class="cat_button" type="submit" value="Log in" />&nbsp;<a href="/_System/SystemPages/PasswordRetrieveRequest">Lost password?</a></div></div>
+				<script type="text/javascript" src="/CatalystScripts/ValidationFunctions.js?vs=b1766.r468257-phase1"></script>
+				<script type="text/javascript">
+				//<![CDATA[
+				function checkWholeForm10341(theForm){var why = "";if (theForm.Username) why += isEmpty(theForm.Username.value, "Username");if (theForm.Password) why += isEmpty(theForm.Password.value, "Password");if (why != ""){alert(why);return false;}theForm.submit();return false;}
+				//]]>
+				</script>
+			</form>
+		</div>
+		{% endif -%}
+
+		{% if showSignUpForm == "true" -%}
+			<div style="width: 600px">
+				<h2>If you do not have password access with MTIA, please fill out the form below detailing your equivalent basic training to apply for password access to enable you to register for the TDR.</h2>
+			    {module_webform,105098}
+			</div>
+		{% endif -%}
+
+		{% if showBookingForm == "true" -%}
+		<form id="event-booking-form" class="form-style payment-form" name="catwebformform71587" method="post" onsubmit="return checkWholeForm71587(this)" enctype="multipart/form-data" action="https://mtia.worldsecuresystems.com/FormProcessv2.aspx?WebFormID=99039&amp;OID={{this.['Event ID']}}&amp;OTYPE=61&amp;EID={module_eid}&amp;CID={module_cid}&amp;CC={module_urlcountrycode}&amp;Referrer={module_siteurl,true,true&SendInvoice=true}&OPTIN=true">
 			<h2>Registration</h2>
 			<p style="color: #545454"><span class="req">*</span> Required fields</p>
 			<div class="form row">
@@ -42,7 +93,7 @@
 					<select name="CAT_Custom_19994574" id="CAT_Custom_19994574" class="cat_dropdown">
 						<option value=" ">-- Please Select --</option>
 						{module_webapps,27095,a,,,,,,,1,}
-					</select>			
+					</select>
 				</div>
 				<div class="item col-lg-24">
 					<p><strong>Billing Details</strong></p>
@@ -368,27 +419,41 @@
 					<input type="text" name="CardCCV" id="CardCCV" class="cat_textbox" autocomplete="off" required />
 				</div>
 				<div class="item col-lg-12">
-					<label for="Amount">Amount <span class="req">*</span> <span id='constraint-300-label'></span></label><br />
-					<input type="text" name="Amount" id="Amount" class="cat_textbox readonly" value="{{this.['Price']}}" readonly />
+					<label for="DiscountCode">Discount Code<span id='constraint-300-label'></span></label><br />
+					<input type="text" name="DiscountCode" id="DiscountCode" class="cat_textbox" value="" />
+					<span id="DiscountCode_Description"></span>
 				</div>
 				<div class="item col-lg-12">
+					<label for="Amount">Amount <span class="req">*</span> <span id='constraint-300-label'></span></label><br />
+					<input type="text" name="Amount" id="Amount" class="cat_textbox readonly" value="{{this.['Price']}}" readonly />
+					<input type="hidden" name="Amount_Original" id="Amount_Original" class="cat_textbox readonly" value="{{this.['Price']}}" readonly />
+				</div>
+				<div class="item col-lg-24">
 					<button title="Process Payment" class="btn btn-success">Process Payment</button>
 				</div>
 				<div class="item hide">
 					{module_ccsecurity}
 					<input checked="checked" type="radio" name="PaymentMethodType" id="PaymentMethodType_1" value="1" />
-					<input checked="checked" type="checkbox" name="CampaignList_54119" />			
+					<input checked="checked" type="checkbox" name="CampaignList_54119" />
 					<input type="text" maxlength="4000" name="CAT_Custom_19994555" id="CAT_Custom_19994555" class="cat_textbox" placeholder="Event Name" value="{{name}}" />
 					<input type="text" maxlength="4000" name="BookingAllocation" id="BookingAllocation" class="cat_textbox" placeholder="Booking Allocation" value="1" />
 				</div>
 			</div>
-			<script type="text/javascript" src="/CatalystScripts/ValidationFunctions.js?vs=b1677.r461496-phase1"></script><script type="text/javascript">
+			<script type="text/javascript" src="/CatalystScripts/ValidationFunctions.js?vs=b1677.r461496-phase1"></script>
+			<script type="text/javascript">
 			//<![CDATA[
 			var submitcount32231 = 0;function checkWholeForm71587(theForm){var why = "";if (theForm.FullName) why += isEmpty(theForm.FullName.value, "Full Name"); if (theForm.EmailAddress) why += checkEmail(theForm.EmailAddress.value); if (theForm.BillingAddress) why += isEmpty(theForm.BillingAddress.value, "Billing Address"); if (theForm.BillingCity) why += isEmpty(theForm.BillingCity.value, "Billing City"); if (theForm.BillingState) why += isEmpty(theForm.BillingState.value, "Billing State"); if (theForm.BillingZip) why += isEmpty(theForm.BillingZip.value, ""); if (theForm.BillingCountry) why += checkDropdown(theForm.BillingCountry.value, "Billing Country"); if (theForm.PaymentMethodType) why += checkSelected(theForm.PaymentMethodType, "Payment Method");if (theForm.HomePhone) why += isEmpty(theForm.HomePhone.value, "Home Phone Number"); if (!theForm.PaymentMethodType || getRadioSelected(theForm.PaymentMethodType) == 1) { if (theForm.CardName) why += isEmpty(theForm.CardName.value, "Name on Card"); if (theForm.CardNumber) why += isNumeric(theForm.CardNumber.value, "Card Number"); if (theForm.Amount) why += isCurrency(theForm.Amount.value, "Amount"); } if(why != ""){alert(why);return false;}if(submitcount32231 == 0){submitcount32231++;theForm.submit();return false;}else{alert("Form submission is in progress.");return false;}}
 			//]]>
 			</script>
 		</form>
+		{% endif -%}
 	{% else -%}
 		<p><strong>Event registration coming soon.</strong></p>
 	{% endif -%}
 </div>
+
+{module_data resource="discountcodes" version="v3" collection="discountcode_list"}
+<script>
+	discountcode_list={{discountcode_list|json}};
+</script>
+<!-- {{this.['classifications']}} -->

@@ -1,0 +1,32 @@
+{module_webapps render="collection" id="Event Bookings" filter="all" itemId="" targetFrame="" resultsPerPage="" hideEmptyMessage="false" rowCount="" sortType="" collection="eventBookings" template=""}
+<pre>{{this|json}}</pre>
+<div class="section" id="home-tabs-feature">
+	<div class="row no-gutter">
+		<div class="tab-content">
+			{% for tabContent in homeTabs.items %}
+				{% if homeTabs.items -%}
+					<div class="tab-pane fade in active" id="tab{{tabContent.counter}}">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+							<div class="tab-pane-text">
+								<h3>{{tabContent.["Heading"]}}</h3>
+								{{tabContent.["Blurb"]}}
+								<a class="btn btn-default" href="{{tabContent.["Button URL"]}}" role="button" title="{{tabContent.["Button Text"]}}">{{tabContent.["Button Text"]}} <i class="fa fa-caret-right"></i></a>
+							</div>
+						</div>
+						<div class="hidden-xs hidden-sm hidden-md col-lg-6">
+							<div class="tab-pane-img">
+								<img src="{{tabContent.["Image"]}}" alt="{{tabContent.["Heading"]}}" title="{{tabContent.["Heading"]}}" />
+							</div>
+						</div>
+					</div>
+				{% endif -%}
+			{% endfor -%}
+		</div>
+	</div>
+</div>
+<div class="event-list">
+	<h3>{{name}}</h3>
+	<div class="ev-loc=short">{{this.['Address/Location Information']}}</div>
+	<div class="ev-loc=short">{{this.['Address/Location Information']}}</div>
+	<a href="{{url}}" class="btn btn-primary" title="Click to view and book this event">View Event</a>
+</div>
