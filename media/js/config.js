@@ -67,6 +67,29 @@ jQuery(document).ready(function(){
 		$('#CAT_Custom_19994004').val(itemPurchased);		
 	}
 
+		$("#DiscountCode").blur(function() {
+			if($("Amount_Original").val() == "")
+			{
+				$("Amount_Original").val($("Amount").val())
+			}
+			var index;
+			for (index = 0; index < discountcode_list.items.length; ++index) {
+				if(discountcode_list.items[index].code == $("#DiscountCode").val())
+				{
+					$("#DiscountCode_Description").text(discountcode_list.items[index].description);
+					if(discountcode_list.items[index].discountType == 2) // fixed $ amount
+					{
+						$("#Amount").val(($("#Amount_Original").val() - discountcode_list.items[index].discountPercentageOrFixedAmount).toFixed(2));
+					}
+					if(discountcode_list.items[index].discountType == 1) // % amount
+					{
+						$("#Amount").val(($("#Amount_Original").val() * (1 - discountcode_list.items[index].discountPercentageOrFixedAmount)).toFixed(2));						
+					}
+				}
+			}
+		});		
+
+
     $(window).load(function(){
         $("body img").each(function(){ 
             var image = $(this); 

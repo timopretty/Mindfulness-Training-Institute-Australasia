@@ -69,7 +69,7 @@ or an equivalent basic training with another organization eg. CTAD, Openground, 
 		{% endif -%}
 
 		{% if showBookingForm == "true" -%}
-		<form id="event-booking-form" class="form-style payment-form" name="catwebformform71587" method="post" onsubmit="return checkWholeForm71587(this)" enctype="multipart/form-data" action="https://mtia.worldsecuresystems.com/FormProcessv2.aspx?WebFormID=99039&amp;OID={{this.['Event ID']}}&amp;OTYPE=61&amp;EID={module_eid}&amp;CID={module_cid}&amp;CC={module_urlcountrycode}&amp;Referrer={module_siteurl,true,true&SendInvoice=true}&OPTIN=true">
+		<form id="event-booking-form" class="form-style payment-form" name="catwebformform71587" method="post" onsubmit="return checkWholeForm71587(this)" enctype="multipart/form-data" action="https://mtia.worldsecuresystems.com/FormProcessv2.aspx?WebFormID=99039&amp;OID={{this.['Event ID']}}&amp;OTYPE=61&amp;EID={module_eid}&amp;CID={module_cid}&amp;CC={module_urlcountrycode}&amp;Referrer={module_siteurl,true,true}&SendInvoice=true&OPTIN=true">
 			<h2>Registration</h2>
 			<p style="color: #545454"><span class="req">*</span> Required fields</p>
 			<div class="form row">
@@ -369,6 +369,11 @@ or an equivalent basic training with another organization eg. CTAD, Openground, 
 				<div class="item col-lg-24">
 					<p><strong>Payment Details</strong></p>
 				</div>
+				<div class="item col-lg-24">
+					<label for="DiscountCode">Discount Code<span id='constraint-300-label'></span></label><br />
+					<input type="text" name="DiscountCode" id="DiscountCode" class="cat_textbox" value="" />
+					<span id="DiscountCode_Description"></span>
+				</div>
 				<div class="item col-lg-12">
 					<label for="CardName">Name on Card <span class="req">*</span></label><br />
 					<input type="text" name="CardName" id="CardName" class="cat_textbox" autocomplete="off" required />
@@ -418,11 +423,7 @@ or an equivalent basic training with another organization eg. CTAD, Openground, 
 					<label for="CardCCV">CCV Number <span class="req">*</span></label><br />
 					<input type="text" name="CardCCV" id="CardCCV" class="cat_textbox" autocomplete="off" required />
 				</div>
-				<div class="item col-lg-12">
-					<label for="DiscountCode">Discount Code<span id='constraint-300-label'></span></label><br />
-					<input type="text" name="DiscountCode" id="DiscountCode" class="cat_textbox" value="" />
-					<span id="DiscountCode_Description"></span>
-				</div>
+				
 				<div class="item col-lg-12">
 					<label for="Amount">Amount <span class="req">*</span> <span id='constraint-300-label'></span></label><br />
 					<input type="text" name="Amount" id="Amount" class="cat_textbox readonly" value="{{this.['Price']}}" readonly />
@@ -439,7 +440,7 @@ or an equivalent basic training with another organization eg. CTAD, Openground, 
 					<input type="text" maxlength="4000" name="BookingAllocation" id="BookingAllocation" class="cat_textbox" placeholder="Booking Allocation" value="1" />
 				</div>
 			</div>
-			<script type="text/javascript" src="/CatalystScripts/ValidationFunctions.js?vs=b1677.r461496-phase1"></script>
+			<script type="text/javascript" src="/CatalystScripts/ValidationFunctions.js"></script>
 			<script type="text/javascript">
 			//<![CDATA[
 			var submitcount32231 = 0;function checkWholeForm71587(theForm){var why = "";if (theForm.FullName) why += isEmpty(theForm.FullName.value, "Full Name"); if (theForm.EmailAddress) why += checkEmail(theForm.EmailAddress.value); if (theForm.BillingAddress) why += isEmpty(theForm.BillingAddress.value, "Billing Address"); if (theForm.BillingCity) why += isEmpty(theForm.BillingCity.value, "Billing City"); if (theForm.BillingState) why += isEmpty(theForm.BillingState.value, "Billing State"); if (theForm.BillingZip) why += isEmpty(theForm.BillingZip.value, ""); if (theForm.BillingCountry) why += checkDropdown(theForm.BillingCountry.value, "Billing Country"); if (theForm.PaymentMethodType) why += checkSelected(theForm.PaymentMethodType, "Payment Method");if (theForm.HomePhone) why += isEmpty(theForm.HomePhone.value, "Home Phone Number"); if (!theForm.PaymentMethodType || getRadioSelected(theForm.PaymentMethodType) == 1) { if (theForm.CardName) why += isEmpty(theForm.CardName.value, "Name on Card"); if (theForm.CardNumber) why += isNumeric(theForm.CardNumber.value, "Card Number"); if (theForm.Amount) why += isCurrency(theForm.Amount.value, "Amount"); } if(why != ""){alert(why);return false;}if(submitcount32231 == 0){submitcount32231++;theForm.submit();return false;}else{alert("Form submission is in progress.");return false;}}
