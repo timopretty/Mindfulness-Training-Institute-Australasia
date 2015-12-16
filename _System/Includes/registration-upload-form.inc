@@ -1,4 +1,4 @@
-<form action="/FormProcessv2.aspx?WebFormID=112148&OID={module_oid}&OTYPE={module_otype}&EID={module_eid}&CID={module_cid}" enctype="multipart/form-data" onSubmit="return checkWholeForm42838(this)" method="post" name="catwebformform42838" class="form-style">
+<form action="/FormProcessv2.aspx?WebFormID=112148&OID={module_oid}&OTYPE={module_otype}&EID={module_eid}&CID={module_cid}" enctype="multipart/form-data" onSubmit="return checkWholeForm42838(this)" method="post" name="catwebformform42838" class="form-style" id="application-upload">
 	<p style="color: #545454"><span class="req">*</span> Required fields</p>
 	<div class="form row">
 		<div class="form-group">
@@ -31,8 +31,8 @@
 				<label for="CAT_Custom_20029092">Training Course <span class="req">*</span></label><br />
 				<select name="CAT_Custom_20029092" id="CAT_Custom_20029092" class="cat_dropdown">
 					<option value=" " selected="selected">- Please Select -</option>
-					<option value="Level I">Level I</option>
-					<option value="Level II">Level II</option>
+					<option value="Level I" data-workflow="62706">Level I</option>
+					<option value="Level II" data-workflow="63452">Level II</option>
 				</select>
 			</div>
 			<div class="item col-lg-12">
@@ -46,6 +46,7 @@
 			</div>
 		</div>
 		<div class="form-group hide">
+			<input type="text" class="cat_textbox" id="WorkflowList" name="WorkflowList" placeholder="Workflow ID" readonly="readonly" />
 			{module_ccsecurity}
 		</div>
 	</div>

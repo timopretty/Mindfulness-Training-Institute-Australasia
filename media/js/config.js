@@ -1,8 +1,8 @@
 jQuery(document).ready(function(){
-    
+
     var win_width = $(window).width();
     var standardMenu = $("#menu-wrapper").html();
-   
+
     if (win_width > 959) {
         $('ul.sf-menu').superfish();
     } else {
@@ -41,7 +41,7 @@ jQuery(document).ready(function(){
 
 	// Side Menu - Add selected class to active menu item
 	$('.side-menu'+' a').each(function(){
-		linkUrl = $(this).attr('href');		
+		linkUrl = $(this).attr('href');
 		if (window.location.protocol !== 'https:'){
 			if ( window.location.pathname == linkUrl){
 				$(this).addClass('selected');
@@ -61,42 +61,49 @@ jQuery(document).ready(function(){
 		}
 	});
 
-	// Payment Form - Item Purchased	
-	if ($('.payment-form').length){
-		var itemPurchased = $('h1:first').text();
-		$('#CAT_Custom_19994004').val(itemPurchased);		
+    // Training Course Application Upload Workflow
+	if ($('form#application-upload').length){
+        $('#CAT_Custom_20029092').blur(function(){
+    		var workflow = $(this).find(':selected').data('workflow');
+            $('#WorkflowList').val(workflow);
+    	});
 	}
 
-		$("#DiscountCode").blur(function() {
-			if($("Amount_Original").val() == "")
+	// Payment Form - Item Purchased
+	if ($('.payment-form').length){
+		var itemPurchased = $('h1:first').text();
+		$('#CAT_Custom_19994004').val(itemPurchased);
+	}
+
+	$("#DiscountCode").blur(function() {
+		if($("Amount_Original").val() == "")
+		{
+			$("Amount_Original").val($("Amount").val())
+		}
+		var index;
+		for (index = 0; index < discountcode_list.items.length; ++index) {
+			if(discountcode_list.items[index].code == $("#DiscountCode").val())
 			{
-				$("Amount_Original").val($("Amount").val())
-			}
-			var index;
-			for (index = 0; index < discountcode_list.items.length; ++index) {
-				if(discountcode_list.items[index].code == $("#DiscountCode").val())
+				$("#DiscountCode_Description").text(discountcode_list.items[index].description);
+				if(discountcode_list.items[index].discountType == 2) // fixed $ amount
 				{
-					$("#DiscountCode_Description").text(discountcode_list.items[index].description);
-					if(discountcode_list.items[index].discountType == 2) // fixed $ amount
-					{
-						$("#Amount").val(($("#Amount_Original").val() - discountcode_list.items[index].discountPercentageOrFixedAmount).toFixed(2));
-					}
-					if(discountcode_list.items[index].discountType == 1) // % amount
-					{
-						$("#Amount").val(($("#Amount_Original").val() * (1 - discountcode_list.items[index].discountPercentageOrFixedAmount)).toFixed(2));						
-					}
+					$("#Amount").val(($("#Amount_Original").val() - discountcode_list.items[index].discountPercentageOrFixedAmount).toFixed(2));
+				}
+				if(discountcode_list.items[index].discountType == 1) // % amount
+				{
+					$("#Amount").val(($("#Amount_Original").val() * (1 - discountcode_list.items[index].discountPercentageOrFixedAmount)).toFixed(2));
 				}
 			}
-		});		
-
+		}
+	});
 
     $(window).load(function(){
-        $("body img").each(function(){ 
-            var image = $(this); 
-            if(image.context.naturalWidth == 0 || image.readyState == 'uninitialized'){  
+        $("body img").each(function(){
+            var image = $(this);
+            if(image.context.naturalWidth == 0 || image.readyState == 'uninitialized'){
                 $(image).unbind("error").hide();
-            } 
+            }
         });
-    });   
+    });
 
  })
