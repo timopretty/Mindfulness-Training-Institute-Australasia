@@ -358,35 +358,8 @@
 		var submitcount32231 = 0;function checkWholeForm32231(theForm){var why = "";if (theForm.FirstName) why += isEmpty(theForm.FirstName.value, "First Name"); if (theForm.LastName) why += isEmpty(theForm.LastName.value, "Last Name"); if (theForm.EmailAddress) why += checkEmail(theForm.EmailAddress.value); if (theForm.BillingAddress) why += isEmpty(theForm.BillingAddress.value, "Billing Address"); if (theForm.BillingCity) why += isEmpty(theForm.BillingCity.value, "Billing City"); if (theForm.BillingState) why += isEmpty(theForm.BillingState.value, "Billing State"); if (theForm.BillingZip) why += isEmpty(theForm.BillingZip.value, ""); if (theForm.BillingCountry) why += checkDropdown(theForm.BillingCountry.value, "Billing Country"); if (theForm.PaymentMethodType) why += checkSelected(theForm.PaymentMethodType, "Payment Method");if (theForm.HomePhone) why += isEmpty(theForm.HomePhone.value, "Home Phone Number"); if (!theForm.PaymentMethodType || getRadioSelected(theForm.PaymentMethodType) == 1) { if (theForm.CardName) why += isEmpty(theForm.CardName.value, "Name on Card"); if (theForm.CardNumber) why += isNumeric(theForm.CardNumber.value, "Card Number"); if (theForm.Amount) why += isCurrency(theForm.Amount.value, "Amount"); } if(why != ""){alert(why);return false;}if(submitcount32231 == 0){submitcount32231++;theForm.submit();return false;}else{alert("Form submission is in progress.");return false;}}
 		//]]>
 		</script>
-	</form>	
+	</form>
 {% else -%}
 	<p><strong>The purchase of a study modules is limited to course attendees and not available to the general public.<br />If you're a course attendee please login below.</strong></p>
-	<div class="secure-login secure-login-horizontal">
-		<form name="catseczoneform52478" onSubmit="return checkWholeForm52478(this)" method="post" action="https://mtia.worldsecuresystems.com/ZoneProcess.aspx?ZoneID=-1&amp;Referrer={module_siteUrl,true,true}&amp;OID={module_oid}&amp;OTYPE={module_otype}">
-			<div class="form row">
-				<div class="item col-lg-12">
-					<label for="SZUsername">Username</label><br />
-					<input class="form-control" type="text" name="Username" id="SZUsername" maxlength="255" />
-				</div>
-				<div class="item col-lg-12">
-					<label for="SZPassword">Password</label><br />
-					<input class="form-control" type="password" name="Password" id="SZPassword" maxlength="255" autocomplete="off" />
-				</div>
-				<div class="item col-lg-12">
-					<input type="checkbox" name="RememberMe" id="RememberMe" />
-					<label for="RememberMe">Remember Me</label>
-				</div>
-				<div class="item col-lg-12">
-					<input class="btn btn-primary" type="submit" value="Log in" />
-					&nbsp;<a href="/_System/SystemPages/PasswordRetrieveRequest" class="lost-password">Lost password?</a>
-				</div>
-			</div>
-			<script type="text/javascript" src="/CatalystScripts/ValidationFunctions.js"></script> 
-			<script type="text/javascript">
-			//<![CDATA[
-			function checkWholeForm52478(theForm){var why = "";if (theForm.Username) why += isEmpty(theForm.Username.value, "Username");if (theForm.Password) why += isEmpty(theForm.Password.value, "Password");if (why != ""){alert(why);return false;}theForm.submit();return false;}
-			//]]>
-			</script>
-		</form>
-	</div>
+	{% include "/_System/Includes/login-form-horizontal.inc" %}
 {% endif -%}

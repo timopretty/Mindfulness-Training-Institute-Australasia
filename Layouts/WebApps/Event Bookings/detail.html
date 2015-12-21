@@ -1,4 +1,5 @@
 <div class="event-booking" data-booking-id="{{this.['Event ID']}}">
+
 	<div class="event-info">
 		<h1>{{name}}</h1>
 		{% if this['Price'] != "" -%}
@@ -17,36 +18,54 @@
 			<p>{{description}}</p>
 		{% endif -%}
 	</div>
+
 	{% if this['Registration Open'] != "No" -%}
+
 		{% if this['classifications'] contains "Teacher" -%}
 			{% if globals.user.isLoggedIn == true -%}
+
 				{module_data resource="zonecustomers" version="v3" fields="customerId,zoneId,secureZone,customer" skip="0" limit="10" where="\{'customer.id':'{{globals.user.entityId}}'\}" order="zoneId" collection="zoneData"}
 				{% if zoneData.items[0].secureZone.name == "Student Secure Zone" -%}
-					{% assign showLoginForm = "false" -%}
+					{% assign showTDRLoginForm = "false" -%}
 					{% assign showBookingForm = "true" -%}
-					{% assign showSignUpForm = "false" -%}
+					{% assign showTDRSignUpForm = "false" -%}
 				{% else -%}
-					{% assign showLoginForm = "false" -%}
+					{% assign showTDRLoginForm = "false" -%}
 					{% assign showBookingForm = "false" -%}
-					{% assign showSignUpForm = "true" -%}
+					{% assign showTDRSignUpForm = "true" -%}
 				{% endif -%}
 			{% else -%}
-				{% assign showLoginForm = "true" -%}
+				{% assign showTDRLoginForm = "true" -%}
 				{% assign showBookingForm = "false" -%}
-				{% assign showSignUpForm = "true" -%}
+				{% assign showTDRSignUpForm = "true" -%}
 			{% endif -%}
+
 		{% else -%}
+
+			{% assign showTDRLoginForm = "false" -%}
+			{% assign showTDRSignUpForm = "false" -%}
+
 			{% assign showBookingForm = "true" -%}
-			{% assign showLoginForm = "false" -%}
-			{% assign showSignUpForm = "false" -%}
+			{% comment %}
+				{% if this['Display Login Prompt'] != "No" -%}
+					{% if globals.user.isLoggedIn == true -%}
+						{% assign showBookingForm = "true" -%}
+						{% assign showLoginForm = "false" -%}
+					{% else -%}
+						{% assign showBookingForm = "false" -%}
+						{% assign showLoginForm = "true" -%}
+					{% endif -%}
+				{% endif -%}
+			{% endcomment %}
+
 		{% endif -%}
 
-		{% if showSignUpForm == "true" -%}
+		{% if showTDRSignUpForm == "true" -%}
 			<h2>The TDR is for all who have completed the MBSR/CT  Level I Intensive with MTIA,
 or an equivalent basic training with another organization eg. CTAD, Openground, CFM etc.</h2>
 		{% endif -%}
 
-		{% if showLoginForm == "true" -%}
+		{% if showTDRLoginForm == "true" -%}
 		<div class="secure-login" style="float: right">
 			<h3>Login here if you have password access</h3>
 			<form name="catseczoneform10341" onsubmit="return checkWholeForm10341(this)" method="post" action="https://mtia.worldsecuresystems.com/ZoneProcess.aspx?ZoneID=-1&Referrer={module_siteUrl,true,true}&OID={module_oid}&OTYPE={module_otype}">
@@ -61,11 +80,19 @@ or an equivalent basic training with another organization eg. CTAD, Openground, 
 		</div>
 		{% endif -%}
 
-		{% if showSignUpForm == "true" -%}
+		{% if showTDRSignUpForm == "true" -%}
 			<div style="width: 600px">
 				<h2>If you do not have password access with MTIA, please fill out the form below detailing your equivalent basic training to apply for password access to enable you to register for the TDR.</h2>
 			    {module_webform,105098}
 			</div>
+		{% endif -%}
+
+		{% if showLoginForm == "true" -%}
+			<h2>Make A Booking</h2>
+			<h3>I do not have a username and password</h3>
+			<button id="new-customer">Proceed To Booking</button>
+			<h3>I have a username and password</h3>
+			{% include "/_System/Includes/login-form-horizontal.inc" %}
 		{% endif -%}
 
 		{% if showBookingForm == "true" -%}
@@ -423,7 +450,7 @@ or an equivalent basic training with another organization eg. CTAD, Openground, 
 					<label for="CardCCV">CCV Number <span class="req">*</span></label><br />
 					<input type="text" name="CardCCV" id="CardCCV" class="cat_textbox" autocomplete="off" required />
 				</div>
-				
+
 				<div class="item col-lg-12">
 					<label for="Amount">Amount <span class="req">*</span> <span id='constraint-300-label'></span></label><br />
 					<input type="text" name="Amount" id="Amount" class="cat_textbox readonly" value="{{this.['Price']}}" readonly />
@@ -454,7 +481,4 @@ or an equivalent basic training with another organization eg. CTAD, Openground, 
 </div>
 
 {module_data resource="discountcodes" version="v3" collection="discountcode_list"}
-<script>
-	discountcode_list={{discountcode_list|json}};
-</script>
-<!-- {{this.['classifications']}} -->
+<script>discountcode_list={{discountcode_list|json}};</script>
