@@ -75,6 +75,17 @@ jQuery(document).ready(function(){
 		$('#CAT_Custom_19994004').val(itemPurchased);
 	}
 
+    // Bookings
+    if ($('#event-booking-form').length){
+
+        $('#new-customer-booking').click(function(){
+            $('#booking-login-prompt').slideUp();
+            $('#event-booking-form').fadeIn();
+        });
+
+	}
+
+    // Bookings - Discount Code
 	$("#DiscountCode").blur(function() {
 		if($("Amount_Original").val() == "")
 		{

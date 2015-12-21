@@ -44,19 +44,15 @@
 
 			{% assign showTDRLoginForm = "false" -%}
 			{% assign showTDRSignUpForm = "false" -%}
-
 			{% assign showBookingForm = "true" -%}
-			{% comment %}
-				{% if this['Display Login Prompt'] != "No" -%}
-					{% if globals.user.isLoggedIn == true -%}
-						{% assign showBookingForm = "true" -%}
-						{% assign showLoginForm = "false" -%}
-					{% else -%}
-						{% assign showBookingForm = "false" -%}
-						{% assign showLoginForm = "true" -%}
-					{% endif -%}
+
+			{% if this['Display Login Prompt'] != "No" -%}
+				{% if globals.user.isLoggedIn == true -%}
+					{% assign showLoginForm = "false" -%}
+				{% else -%}
+					{% assign showLoginForm = "true" -%}
 				{% endif -%}
-			{% endcomment %}
+			{% endif -%}
 
 		{% endif -%}
 
@@ -88,15 +84,23 @@ or an equivalent basic training with another organization eg. CTAD, Openground, 
 		{% endif -%}
 
 		{% if showLoginForm == "true" -%}
-			<h2>Make A Booking</h2>
-			<h3>I do not have a username and password</h3>
-			<button id="new-customer">Proceed To Booking</button>
-			<h3>I have a username and password</h3>
-			{% include "/_System/Includes/login-form-horizontal.inc" %}
+		<div id="booking-login-prompt" class="row">
+			<div class="col-lg-24">
+				<h2>Make A Booking</h2>
+			</div>
+		    <div class="col-lg-12">
+				<h3>I do not have a username and password.</h3>
+				<button id="new-customer-booking" class="btn btn-primary">Proceed To Booking</button>
+			</div>
+			<div class="col-lg-12">
+				<h3>I have a username and password.</h3>
+				{% include "/_System/Includes/login-form-horizontal.inc" %}
+			</div>
+		</div>
 		{% endif -%}
 
 		{% if showBookingForm == "true" -%}
-		<form id="event-booking-form" class="form-style payment-form" name="catwebformform71587" method="post" onsubmit="return checkWholeForm71587(this)" enctype="multipart/form-data" action="https://mtia.worldsecuresystems.com/FormProcessv2.aspx?WebFormID=99039&amp;OID={{this.['Event ID']}}&amp;OTYPE=61&amp;EID={module_eid}&amp;CID={module_cid}&amp;CC={module_urlcountrycode}&amp;Referrer={module_siteurl,true,true}&SendInvoice=true&OPTIN=true">
+		<form id="event-booking-form" class="form-style payment-form" name="catwebformform71587" method="post" onsubmit="return checkWholeForm71587(this)" enctype="multipart/form-data" action="https://mtia.worldsecuresystems.com/FormProcessv2.aspx?WebFormID=99039&amp;OID={{this.['Event ID']}}&amp;OTYPE=61&amp;EID={module_eid}&amp;CID={module_cid}&amp;CC={module_urlcountrycode}&amp;Referrer={module_siteurl,true,true}&SendInvoice=true&OPTIN=true" {% if this['Display Login Prompt'] != "No" -%}{% if globals.user.isLoggedIn == false -%}style="display: none"{% endif -%}{% endif -%}>
 			<h2>Registration</h2>
 			<p style="color: #545454"><span class="req">*</span> Required fields</p>
 			<div class="form row">
