@@ -1,0 +1,17 @@
+<div id="ct-detail">
+	<img src="{{Image}}?Action=thumbnail&Width=250&Height300&algorithm=fill" alt="Profile Image" class="pull-left ct-image" />
+	<h1>{{name}}</h1>
+	{% if description != '' -%}
+	<h2>Professional Background and qualifications</h2>
+	{{description}}
+	{% endif -%}
+	{% if this.['Contact Details'] != '' -%}
+	<h2>Contact Details</h2>
+	{{this.['Contact Details']}}
+	{% endif -%}
+	{% if this.['Website'] != '' -%}
+	<h2>Website</h2>
+	<a href="{{this.['Website']}}" title="{{this.['Website']}}">{{this.['Website']}}</a>
+	{% endif -%}
+</div>
+

@@ -302,6 +302,12 @@ ul.side-menu li a.selected {
 .event-list h2 {
 	margin-top: 0;
 }
+#ct-detail {
+	padding-bottom: 30px;
+}
+.ct-image {
+	padding: 0 25px 20px 0;
+}
 
 @media (max-width: 767px) {
 	.head ul#top-menu,
